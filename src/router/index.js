@@ -7,7 +7,7 @@ const sessionChecker = (req, res, next) => {
 };
 
 router.get('/', sessionChecker, (req, res) => {
-  res.json({ loc: 'home' });
+  res.json({ loc: 'Anna Bunanaaaaa :)' });
 });
 
 module.exports = router;
