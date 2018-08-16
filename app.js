@@ -1,11 +1,49 @@
+require('dotenv').config();
+
 const express = require('express');
+const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
+const session = require('express-session');
+const exphbs = require('express-handlebars');
 
 const app = express();
 const router = require('./src/router');
+const hbs = exphbs.create({
+  layoutsDir: "./src/templates",
+  partialsDir: "./src/templates/partials"
+});
+
+app.use(bodyParser.urlencoded({ extended: true  }));
+app.use(express.static('./src/templates'));
+app.set('views', './src/templates');
+app.engine('handlebars', hbs.engine);
+app.set('view engine', 'handlebars');
+
+app.use(cookieParser());
+
+app.use(
+  session({
+    key: 'user_sid',
+    secret: 'randomsecret123',
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+      expires: 600000
+    }
+  })
+);
+
+app.use((req, res, next) => {
+  if (req.cookies.user_sid && !req.session.user) {
+    res.clearCookie('user_sid');
+  }
+
+  next();
+});
 
 app.use('/', router);
 
-app.use(function (req, res, next) {
+app.use((req, res, next) => {
   res.status(404).send("Sorry can't find that!")
 });
 
