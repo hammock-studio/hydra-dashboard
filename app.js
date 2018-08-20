@@ -1,5 +1,6 @@
 require('dotenv').config();
 
+const config = require('./config');
 const express = require('express');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
@@ -8,10 +9,17 @@ const exphbs = require('express-handlebars');
 
 const app = express();
 const router = require('./src/router');
+
 const hbs = exphbs.create({
   layoutsDir: "./src/templates",
   partialsDir: "./src/templates/partials"
 });
+
+require('./src/models')(config.db);
+
+config.db.sync()
+  .then(() => console.log('tables created successfully'))
+  .catch(error => console.log('This error occured', error));
 
 app.use(bodyParser.urlencoded({ extended: true  }));
 app.use(express.static('./src/templates'));
@@ -44,7 +52,7 @@ app.use((req, res, next) => {
 app.use('/', router);
 
 app.use((req, res, next) => {
-  res.status(404).send("Sorry can't find that!")
+  res.status(404).send("Sorry can't find that page!")
 });
 
 app.set('port', (process.env.PORT || 3000));

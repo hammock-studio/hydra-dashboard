@@ -4,7 +4,11 @@ const router = express.Router();
 const hydra = require('../helpers/hydra');
 
 const sessionChecker = (req, res, next) => {
-  next();
+  if (req.session.user && req.cookies.user_sid) {
+    next();
+  } else {
+    res.redirect(`/login?challenge=${req.query.challenge}`);
+  }
 };
 
 router.route('/').get(sessionChecker, (req, res, next) => {

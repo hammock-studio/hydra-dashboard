@@ -1,10 +1,16 @@
 const express = require('express');
 const hydra = require('../helpers/hydra');
+const config = require('../../config');
+const User = require('../models/user')(config.db);
 
 const router = express.Router();
 
 const sessionChecker = (req, res, next) => {
-  next();
+  if (req.session.user && req.cookies.user_sid) {
+    res.redirect('/dashboard');
+  } else {
+    next();
+  }
 };
 
 router.route('/').get(sessionChecker, (req, res, next) => {
@@ -27,20 +33,26 @@ router.route('/').get(sessionChecker, (req, res, next) => {
 router.route('/').post(sessionChecker, (req, res, next) => {
   const { challenge } = req.body;
 
-  // if (!true) {
-  // res.render('login', { challenge, error: 'try again or signup' });
-  // }
+  User.findOne({ where: { username: req.body.username } }).then((user) => {
+    if (!user) {
+      res.render('login', { challenge, error: 'error, try again or signup' });
+    } else if (!user.validPassword(req.body.password)) {
+      res.render('login', { challenge, error: 'error, try again or signup' });
+    } else {
+      req.session.user = user.dataValues;
 
-  const body = {
-    subject: 'tal@pas.com',
-    remember: Boolean(req.body.remember),
-    remember_for: 40
-  };
+      const body = {
+        subject: req.session.user.username,
+        remember: Boolean(req.body.remember),
+        remember_for: 40
+      };
 
-  hydra.acceptLoginRequest(challenge, body).then((response) => {
-    res.redirect(response.redirect_to);
-  }).catch((err) => {
-    next(err);
+      hydra.acceptLoginRequest(challenge, body).then((response) => {
+        res.redirect(response.redirect_to);
+      }).catch((err) => {
+        next(err);
+      });
+    }
   });
 });
 

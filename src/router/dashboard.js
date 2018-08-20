@@ -3,11 +3,19 @@ const express = require('express');
 const router = express.Router();
 
 const sessionChecker = (req, res, next) => {
-  next();
+  if (
+    req.session.user
+    && req.cookies.user_sid
+    && req.session.user.access_token
+  ) {
+    next();
+  } else {
+    res.redirect('/');
+  }
 };
 
 router.get('/', sessionChecker, (req, res) => {
-  res.json({ q: req.session.user });
+  res.json({ session: req.session });
 });
 
 module.exports = router;
