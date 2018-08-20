@@ -1,5 +1,11 @@
 const Sequelize = require('sequelize');
-const sequelize = new Sequelize(process.env.PG_URL);
+const sequelize = new Sequelize(process.env.PG_URL, {
+  dialect:  'postgres',
+  protocol: 'postgres',
+  port: 5432,
+  host: process.env.PG_HOST,
+  logging:  true
+});
 
 module.exports = {
   env: "production",
