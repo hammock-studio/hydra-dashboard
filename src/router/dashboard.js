@@ -4,9 +4,9 @@ const router = express.Router();
 
 const sessionChecker = (req, res, next) => {
   if (
-    req.session.user &&
-    req.cookies.user_sid &&
-    req.session.user.tokens.access_token
+    req.session.user
+    && req.cookies.user_sid
+    && req.session.user.tokens.access_token
   ) {
     next();
   } else {
