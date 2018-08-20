@@ -33,9 +33,8 @@ function put(flow, action, challenge, body) {
   return fetch(url, opts)
     .then((response) => {
       if (response.status < 200 || response.status > 302) {
-          response.json().then((responseBody) => {
-            console.log("###############", responseBody.error)
-            Promise.reject(new Error(responseBody.error.message));
+        response.json().then((responseBody) => {
+          Promise.reject(new Error(responseBody.error.message));
         });
       }
 

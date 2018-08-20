@@ -43,7 +43,7 @@ router.route('/').post(sessionChecker, (req, res, next) => {
 
       const body = {
         subject: req.session.user.username,
-        remember: Boolean(req.body.remember),
+        remember: false || Boolean(req.body.remember),
         remember_for: 40
       };
 
