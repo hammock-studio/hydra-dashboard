@@ -1,5 +1,5 @@
 const Sequelize = require('sequelize');
-const sequelize = new Sequelize(process.env.PG_URL);
+const sequelize = new Sequelize(process.env.PG_URL, null, null, { dialect: 'postgres' });
 
 module.exports = {
   env: "production",
