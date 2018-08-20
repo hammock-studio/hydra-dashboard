@@ -13,8 +13,8 @@ function get(flow, challenge) {
   return fetch(url)
     .then((response) => {
       if (response.status < 200 || response.status > 302) {
-        return response.json().then((body) => {
-          return Promise.reject(new Error(body.error.message));
+        response.json().then((body) => {
+          Promise.reject(new Error(body.error.message));
         });
       }
 
@@ -33,8 +33,9 @@ function put(flow, action, challenge, body) {
   return fetch(url, opts)
     .then((response) => {
       if (response.status < 200 || response.status > 302) {
-        return response.json().then((responseBody) => {
-          return Promise.reject(new Error(responseBody.error.message));
+          response.json().then((responseBody) => {
+            console.log("###############", responseBody.error)
+            Promise.reject(new Error(responseBody.error.message));
         });
       }
 
