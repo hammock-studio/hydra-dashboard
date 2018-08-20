@@ -21,9 +21,12 @@
     "express-handlebars": "^3.0.0",
     "express-session": "^1.15.6",
     "node-fetch": "^2.2.0",
-    "npm": "^6.3.0",
+    "npm": "^6.4.0",
     "ory-hydra-sdk": "^1.0.0-beta.8",
+    "pg": "^7.4.3",
+    "pg-hstore": "^2.3.2",
     "randomstring": "^1.1.5",
+    "sequelize": "^4.38.0",
     "simple-oauth2": "^2.2.1"
   },
   "devDependencies": {

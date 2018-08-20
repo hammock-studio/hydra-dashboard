@@ -1,5 +1,7 @@
 ## Hydra Dashboard
 
+[![CircleCI](https://circleci.com/gh/hammock-studio/hydra-dashboard.svg?style=svg&circle-token=d8865b7eaa5078a41180b75780b5db4ac730c877)](https://circleci.com/gh/hammock-studio/hydra-dashboard)
+
 Implementation of full OAuth2 flow of login and consent with clients and users management.
 Based on [ory hydra] as authorization server.
 
@@ -58,7 +60,7 @@ $ make make reset_hydra_local_to_local
 $ git clone https://github.com/hammock-studio/hydra-dashboard
 ```
 
-- run hydra server
+- run hydra dashboard server
 
 ```
 $ npm install && npm start

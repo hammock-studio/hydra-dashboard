@@ -1,9 +1,9 @@
-// const Sequelize = require('sequelize');
-// const sequelize = new Sequelize(process.env.PG_URL);
-//
+const Sequelize = require('sequelize');
+const sequelize = new Sequelize(process.env.PG_URL);
+
 module.exports = {
   env: "production",
-  // db: sequelize,
+  db: sequelize,
   hydra: {
     "client": {
       "id": process.env.HYDRA_DASHBOARD_CLIENT_ID,
