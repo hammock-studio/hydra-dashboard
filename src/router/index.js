@@ -13,7 +13,6 @@ const sessionChecker = (req, res, next) => {
   if (
     req.session.user
   && req.cookies.user_sid
-  && req.session.user.tokens.access_token
   ) {
     res.redirect('/dashboard');
   } else {
@@ -22,11 +21,7 @@ const sessionChecker = (req, res, next) => {
 };
 
 router.get('/', sessionChecker, (req, res) => {
-  res.json({
-    loc: 'this is the dashboard home page',
-    authorize_dasboard: hydra.getAuthorizationURI(),
-    session: req.session
-  });
+  res.render('landing', { authorizationUri: hydra.getAuthorizationURI() });
 });
 
 router.get('/callback', (req, res) => {
