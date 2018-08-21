@@ -10,7 +10,7 @@ module.exports = {
       "secret": process.env.HYDRA_DASHBOARD_CLIENT_SECRET
     },
     "auth": {
-      "tokenHost": process.env.HYDRA_URL,
+      "tokenHost": process.env.HYDRA_PUBLIC_URL,
       "authorizePath": "/oauth2/auth",
       "tokenPath": "/oauth2/token"
     }

@@ -5,16 +5,16 @@ const config = require('../../config');
 
 const oauth2 = simpleOauth2.create(config.hydra);
 
-const hydraUrl = process.env.HYDRA_URL;
+const hydraAdminUrl = process.env.HYDRA_ADMIN_URL;
 
 function get(flow, challenge) {
-  const url = `${hydraUrl}/oauth2/auth/requests/${flow}/${challenge}`;
+  const url = `${hydraAdminUrl}/oauth2/auth/requests/${flow}/${challenge}`;
 
   return fetch(url)
     .then((response) => {
       if (response.status < 200 || response.status > 302) {
-        response.json().then((body) => {
-          Promise.reject(new Error(body.error.message));
+        return response.json().then((body) => {
+          return Promise.reject(new Error(body.error.message));
         });
       }
 
@@ -23,7 +23,7 @@ function get(flow, challenge) {
 }
 
 function put(flow, action, challenge, body) {
-  const url = `${hydraUrl}/oauth2/auth/requests/${flow}/${challenge}/${action}`;
+  const url = `${hydraAdminUrl}/oauth2/auth/requests/${flow}/${challenge}/${action}`;
   const opts = {
     method: 'PUT',
     body: JSON.stringify(body),
@@ -33,8 +33,8 @@ function put(flow, action, challenge, body) {
   return fetch(url, opts)
     .then((response) => {
       if (response.status < 200 || response.status > 302) {
-        response.json().then((responseBody) => {
-          Promise.reject(new Error(responseBody.error.message));
+        return response.json().then((responseBody) => {
+          return Promise.reject(new Error(responseBody.error.message));
         });
       }
 
