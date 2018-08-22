@@ -52,7 +52,7 @@ $ git clone https://github.com/hammock-studio/hydra-cloud
 - run hydra server
 
 ```
-$ make make reset_hydra_local_to_local
+$ make reset_hydra_local_to_local
 ```
 
 - clone hydra-dashboard
