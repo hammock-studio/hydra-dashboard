@@ -14,7 +14,11 @@ const sessionChecker = (req, res, next) => {
 };
 
 router.get('/', sessionChecker, (req, res) => {
-  res.json({ session: req.session });
+  res.render('dashboard', { username: req.session.user.username });
+});
+
+router.get('/analytics', sessionChecker, (req, res) => {
+  res.render('analytics', { user: req.session.user });
 });
 
 module.exports = router;
