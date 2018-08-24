@@ -4,12 +4,13 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "start": "node app.js",
-    "pretest": "NODE_ENV=test node test/init.js",
+    "start": "npm run db:migrate && node app.js",
+    "pretest": "NODE_ENV=test npm run db:migrate",
     "test": "PORT=3333 NODE_ENV=test `npm bin`/mocha --recursive --require ./test/helper.js --exit ./test/api",
     "test:watch": "npm test -- --watch",
-    "dev": "nodemon app.js",
-    "lint": "`npm bin`/eslint --ext .js src"
+    "dev": "npm run db:migrate && NODE_ENV=development nodemon app.js",
+    "lint": "`npm bin`/eslint --ext .js src",
+    "db:migrate": "`npm bin`/sequelize db:migrate"
   },
   "author": "",
   "license": "ISC",

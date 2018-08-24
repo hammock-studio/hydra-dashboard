@@ -1,6 +1,5 @@
 const faker = require('faker');
-const config = require('../../config');
-const User = require('../../src/models/user')(config.db);
+const { User } = require('../../src/models');
 
 const data = (props = {}) => {
   const defaultProps = {

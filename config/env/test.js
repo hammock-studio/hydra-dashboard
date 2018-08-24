@@ -1,16 +1,9 @@
 if (process.env.NODE_ENV == 'test'){
-  const Sequelize = require('sequelize');
-  const sequelize = new Sequelize(process.env.PG_TEST_URL, {
-    dialect:  'postgres',
-    protocol: 'postgres',
-    port: 5432,
-    host: 'localhost',
-    logging:  false
-  });
+  const dbConfig = require('../database')['test'];
 
   module.exports = {
     env: 'test',
-    db: sequelize,
+    dbConfig,
     hydra: {
       "client": {
         "id": process.env.HYDRA_DASHBOARD_CLIENT_ID,

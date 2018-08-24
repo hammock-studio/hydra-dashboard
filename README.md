@@ -20,8 +20,13 @@ $ mv .env.example .env
 system default environment variables:
 
 ```
-PG_URL='postgres://hydra:secret@localhost:5432/hydra'
-PG_TEST_URL='postgres://hydra:secret@localhost:5432/hydra-test'
+PG_USERNAME='hydra'
+PG_DATABASE='hydra'
+PG_HOST='localhost'
+PG_TEST_USERNAME='hydra'
+PG_TEST_PASSWORD='*'
+PG_TEST_DATABASE='hydra_test'
+PG_TEST_HOST='localhost'
 HYDRA_DASHBOARD_CLIENT_ID='hydra-dashboard'
 HYDRA_DASHBOARD_CLIENT_SECRET='hydra-dashboard-secret'
 HYDRA_PUBLIC_URL='https://localhost:9000'
