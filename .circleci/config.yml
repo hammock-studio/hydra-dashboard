@@ -4,8 +4,9 @@ jobs:
     docker:
       - image: circleci/node:7.10
         environment:
-          PG_URL: postgresql://root@localhost/circle_test
-          PG_TEST_URL: postgresql://root@localhost/circle_test
+          PG_TEST_USERNAME: root
+          PG_TEST_DATABASE: circle_test
+          PG_TEST_HOST: localhost
           API_VERSION: v1
           HYDRA_DASHBOARD_CLIENT_ID: hydra-dashboard-test
           HYDRA_DASHBOARD_CLIENT_SECRET: hydra-dashboard-secret-test

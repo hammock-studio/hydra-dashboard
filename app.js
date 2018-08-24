@@ -17,14 +17,6 @@ const hbs = exphbs.create({
   partialsDir: "./src/templates/partials"
 });
 
-if (process.env.NODE_ENV !== 'test') {
-  require('./src/models')(config.db);
-
-  config.db.sync()
-    .then(() => console.log('tables created successfully'))
-    .catch(error => console.log('This error occured', error));
-}
-
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true  }));
 app.use(bodyParser.text());

@@ -1,10 +1,8 @@
 require('dotenv').config();
 
-const config = require('../config');
-const User = require('../src/models/user')(config.db);
+const models = require('../src/models');
 
 truncate = () => {
-  const models = { User };
   const truncateTable = (model) =>
   model.destroy({
     where: {},
