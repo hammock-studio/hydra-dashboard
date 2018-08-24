@@ -3,6 +3,19 @@ jobs:
   build:
     docker:
       - image: circleci/node:7.10
+        environment:
+          PG_URL: postgresql://root@localhost/circle_test
+          PG_TEST_URL: postgresql://root@localhost/circle_test
+          API_VERSION: v1
+          HYDRA_DASHBOARD_CLIENT_ID: hydra-dashboard-test
+          HYDRA_DASHBOARD_CLIENT_SECRET: hydra-dashboard-secret-test
+          HYDRA_PUBLIC_URL: https://hydra.test:9000
+          HYDRA_ADMIN_URL: https://hydra.test:9001
+          HYDRA_CALLBACK_URI: http://hydra.test:3000/callback
+          HYDRA_CONSENT_URL: http://hydra.test:3000
+
+      - image: circleci/postgres:9.6.5-alpine-ram
+
     steps:
       - checkout
       - restore_cache:
@@ -15,7 +28,8 @@ jobs:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
       - run: npm run lint
-      
+      - run: npm test
+
   deploy:
     docker:
       - image: buildpack-deps:trusty

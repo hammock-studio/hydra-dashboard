@@ -24,7 +24,7 @@ module.exports = (db) => {
     }
   }, {
     hooks: {
-      beforeCreate: (user) => {
+      beforeSave: (user) => {
         const salt = bcrypt.genSaltSync();
         user.password = bcrypt.hashSync(user.password, salt);
       }
