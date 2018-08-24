@@ -4,7 +4,7 @@ const sequelize = new Sequelize(process.env.PG_URL, {
   protocol: 'postgres',
   port: 5432,
   host: process.env.PG_HOST,
-  logging:  true
+  logging:  false
 });
 
 module.exports = {

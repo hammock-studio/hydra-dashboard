@@ -5,7 +5,9 @@
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
-    "test": "NODE_ENV=test `npm bin`/mocha",
+    "pretest": "NODE_ENV=test node test/init.js",
+    "test": "PORT=3333 NODE_ENV=test `npm bin`/mocha --recursive --require ./test/helper.js --exit ./test/api",
+    "test:watch": "npm test -- --watch",
     "dev": "nodemon app.js",
     "lint": "`npm bin`/eslint --ext .js src"
   },
@@ -20,6 +22,7 @@
     "express": "^4.16.3",
     "express-handlebars": "^3.0.0",
     "express-session": "^1.15.6",
+    "morgan": "^1.9.0",
     "node-fetch": "^2.2.0",
     "npm": "^6.4.0",
     "ory-hydra-sdk": "^1.0.0-beta.8",
@@ -27,12 +30,18 @@
     "pg-hstore": "^2.3.2",
     "randomstring": "^1.1.5",
     "sequelize": "^4.38.0",
-    "simple-oauth2": "^2.2.1"
+    "sequelize-cli": "^4.1.1",
+    "simple-oauth2": "^2.2.1",
+    "winston": "^3.0.0"
   },
   "devDependencies": {
+    "chai": "^4.1.2",
+    "chai-http": "^4.0.0",
     "eslint": "^5.3.0",
     "eslint-config-airbnb-base": "^13.0.0",
     "eslint-plugin-import": "^2.13.0",
+    "faker": "^4.1.0",
+    "mocha": "^5.2.0",
     "nodemon": "^1.18.3"
   }
 }
