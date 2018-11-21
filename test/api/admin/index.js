@@ -2,7 +2,6 @@ const app = require('../../../app');
 const chai = require('chai');
 const chaiHttp = require('chai-http');
 const should = chai.should();
-const userFactory = require('../../factories/user');
 const truncate = require('../../helper').truncate;
 
 chai.use(chaiHttp);
