@@ -12,6 +12,7 @@ module.exports = {
       "no-param-reassign": 0,
       "arrow-body-style": 0,
       "arrow-parens": 0,
+      "no-undef": 0,
       "func-names": ["error", "as-needed"]
     }
 };

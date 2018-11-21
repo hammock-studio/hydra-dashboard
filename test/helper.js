@@ -1,6 +1,9 @@
 require('dotenv').config();
-
 const models = require('../src/models');
+const nock = require('nock');
+
+nock.disableNetConnect();
+nock.enableNetConnect('127.0.0.1')
 
 truncate = () => {
   const truncateTable = (model) =>

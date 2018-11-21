@@ -6,7 +6,7 @@
   "scripts": {
     "start": "npm run db:migrate && node app.js",
     "pretest": "NODE_ENV=test npm run db:migrate",
-    "test": "PORT=3333 NODE_ENV=test `npm bin`/mocha --recursive --require ./test/helper.js --exit ./test/api",
+    "test": "PORT=3333 NODE_ENV=test `npm bin`/mocha --recursive --require ./test/helper.js --exit",
     "test:watch": "npm test -- --watch",
     "dev": "npm run db:migrate && NODE_ENV=development nodemon app.js",
     "lint": "`npm bin`/eslint --ext .js src",
@@ -24,6 +24,7 @@
     "express-handlebars": "^3.0.0",
     "express-session": "^1.15.6",
     "morgan": "^1.9.0",
+    "nock": "^9.6.1",
     "node-fetch": "^2.2.0",
     "npm": "^6.4.0",
     "ory-hydra-sdk": "^1.0.0-beta.8",
