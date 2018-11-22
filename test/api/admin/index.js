@@ -19,7 +19,7 @@ describe('Users', () => {
         .get('/api/v1/admin')
         .end((err, res) => {
           res.should.have.status(200);
-          res.body.greet.should.be.eq('hi admin, help yourself');
+          res.body.greet.should.be.eq('hi admin');
           done();
       });
     });

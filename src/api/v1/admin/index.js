@@ -10,7 +10,7 @@ router.use('/users', require('./users'));
 router.use('/clients', require('./clients'));
 
 router.route('/').get((req, res) => {
-  res.json({ greet: 'hi admin, help yourself' });
+  res.json({ greet: 'hi admin' });
 });
 
 module.exports = router;
